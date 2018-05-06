@@ -6,4 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".Insertar">
 
+    <EditText
+        android:id="@+id/etInsertarUrl"
+        android:layout_width="221dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="152dp"
+        android:hint="Inserte URL..."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etInsertarKeywords"
+        android:layout_width="210dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="36dp"
+        android:hint="Inserte palabras clave..."
+        app:layout_constraintEnd_toEndOf="@+id/etInsertarUrl"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="@+id/etInsertarUrl"
+        app:layout_constraintTop_toBottomOf="@+id/etInsertarUrl" />
+
+    <Button
+        android:id="@+id/btnInsercion"
+        android:layout_width="120dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/style_orange"
+        android:text="Insertar"
+        app:layout_constraintEnd_toEndOf="@+id/etInsertarKeywords"
+        app:layout_constraintStart_toStartOf="@+id/etInsertarKeywords"
+        app:layout_constraintTop_toBottomOf="@+id/etInsertarKeywords" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:text="Inserción de URL"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/etInsertarUrl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text='Inserte palabras claves separadas por ",".'
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/etInsertarKeywords"
+        app:layout_constraintTop_toBottomOf="@+id/etInsertarKeywords" />
+
 </android.support.constraint.ConstraintLayout>
