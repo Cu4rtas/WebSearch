@@ -42,11 +42,23 @@
         android:layout_height="67dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
-        android:text="Buscar"
+        android:layout_marginTop="36dp"
         android:background="@drawable/style_orange"
+        android:text="Buscar"
         app:layout_constraintEnd_toEndOf="@+id/btnInsertar"
         app:layout_constraintStart_toStartOf="@+id/btnInsertar"
-        app:layout_constraintTop_toBottomOf="@+id/btnInsertar"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/btnInsertar" />
+
+    <Button
+        android:id="@+id/btnArbol"
+        android:layout_width="152dp"
+        android:layout_height="67dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/style_orange"
+        android:text="Ver árbol"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/btnIrBuscar" />
 </android.support.constraint.ConstraintLayout>

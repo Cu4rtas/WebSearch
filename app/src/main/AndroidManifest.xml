@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Insertar" />
-        <activity android:name=".Buscar"></activity>
+        <activity android:name=".Buscar" />
+        <activity android:name=".TreeView"></activity>
     </application>
 
 </manifest>

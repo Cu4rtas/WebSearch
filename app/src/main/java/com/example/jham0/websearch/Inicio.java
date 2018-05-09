@@ -23,14 +23,17 @@ public class Inicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        connect();
-        insertar();
-        buscar();
+        init();
     }
 
-    private void connect() {
+    private void init() {
+        //Connect
         btnInsertar = findViewById(R.id.btnInsertar);
         btnIrBuscar = findViewById(R.id.btnIrBuscar);
+        //addActions
+        insertar();
+        buscar();
+        findViewById(R.id.btnArbol).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), TreeView.class)));
     }
 
     private void insertar() {

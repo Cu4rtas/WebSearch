@@ -40,7 +40,7 @@ public class Insertar extends AppCompatActivity {
                 Web newWeb = new Web(etInsertarURL.getText().toString());
                 String[] keywords = etInsertarKeywords.getText().toString().split(",");
                 newWeb.addKeyWords(keywords);
-                arbol.insert(newWeb);
+                AppMain.insert(newWeb);
                 Toast.makeText(getApplicationContext(), "Web insertada", Toast.LENGTH_SHORT).show();
             }
         });
