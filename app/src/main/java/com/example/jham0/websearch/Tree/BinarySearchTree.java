@@ -6,6 +6,7 @@ package com.example.jham0.websearch.Tree;
  */
 
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -44,6 +45,22 @@ public class BinarySearchTree< E extends Comparable<? super E> >
             }
         }
         return true;
+    }
+
+    public ArrayList<E> getAllItems(){
+        ArrayList<E> list = new ArrayList<>();
+        list = getAllItems(root, 0, list);
+        return list;
+    }
+
+    private ArrayList<E> getAllItems(BinaryNode<E> node, int c, ArrayList<E> list){
+        if (node != null){
+            list.add(node.item);
+        }
+        if(node == null || node.left == null && node.right == null) return list;
+        list = getAllItems( node.left, c+1, list );
+        list = getAllItems( node.right, c+1, list );
+        return list;
     }
 
     public BinarySearchTree<E> insert(E itemToInsert) {
