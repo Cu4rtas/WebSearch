@@ -62,7 +62,11 @@ public class Insertar extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             etInsertarURL.setText(bundle.getString("Url"));
-            /*etInsertarKeywords.setText(bundle.getStringArray("Keywords").toString());*/
+            String keywords = "";
+            for (int i = 0; i < bundle.getStringArray("Keywords").length; i++) {
+                keywords += bundle.getStringArray("Keywords")[i]+",";
+            }
+            etInsertarKeywords.setText(keywords);
         }
     }
 
