@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AppMain {
+
     private static BinarySearchTree<Web> webs = new BinarySearchTree<>();
 
     public static void insert(Web w){

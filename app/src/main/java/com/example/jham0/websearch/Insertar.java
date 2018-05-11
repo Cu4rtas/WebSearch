@@ -8,8 +8,13 @@ import android.widget.Toast;
 
 import com.example.jham0.websearch.Tree.BinarySearchTree;
 
+import org.w3c.dom.DOMStringList;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Insertar extends AppCompatActivity {
 
@@ -24,6 +29,7 @@ public class Insertar extends AppCompatActivity {
         setContentView(R.layout.activity_insertar);
         connect();
         insertar();
+        obtenerDatos();
     }
 
     private void connect() {
@@ -42,7 +48,28 @@ public class Insertar extends AppCompatActivity {
                 newWeb.addKeyWords(keywords);
                 AppMain.insert(newWeb);
                 Toast.makeText(getApplicationContext(), "Web insertada", Toast.LENGTH_SHORT).show();
+                clearFields();
             }
         });
     }
+
+    //TODO: Meterle las palabras claves
+    /**
+     * Obtiene los datos pasados por Bundle del
+     * activity Buscar(lvBusqueda)
+     */
+    private void obtenerDatos() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            etInsertarURL.setText(bundle.getString("Url"));
+            /*etInsertarKeywords.setText(bundle.getStringArray("Keywords").toString());*/
+        }
+    }
+
+    private void clearFields() {
+        etInsertarURL.setText("");
+        etInsertarKeywords.setText("");
+    }
+
+
 }

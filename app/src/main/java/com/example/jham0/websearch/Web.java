@@ -52,19 +52,11 @@ public class Web implements Comparable<Web>{
         (Arrays.asList(keyWords)).forEach(palabrasClave::add);
         palabrasClave = palabrasClave.stream().distinct().collect(Collectors.toList());
     }
-    
-    public List<String> getKewWords(){
+
+    public List<String> getKewWords() {
         return palabrasClave;
     }
     
-    public boolean matchFound(String... str){
-        return palabrasClave.stream().anyMatch(s -> Arrays.asList(str).contains(s));    
-    }
-    
-    public Web findMatch(String... str){
-        return matchFound() ? this : null;
-    }
-
     @Override
     public int compareTo(Web web2compare) {
         return this.URL.compareTo((web2compare).getURL());

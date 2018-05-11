@@ -49,4 +49,6 @@ public class Inicio extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+
 }
