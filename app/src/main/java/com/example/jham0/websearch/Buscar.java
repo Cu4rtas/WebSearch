@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.jham0.websearch.Tree.BinarySearchTree;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,11 +55,11 @@ public class Buscar extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 /**Calcula el valor en milisegundos del tiempo de busqueda**/
+                DecimalFormat df = new DecimalFormat("#.0000");
                 double newTime = new Long((System.currentTimeMillis() - timeA)/1000).doubleValue();
-                tvSeconds.setText("Tiempo de Busqueda: " +(newTime)+"ms");
+                tvSeconds.setText("Tiempo de Busqueda: " +(df.format(newTime))+"ms");
             }
         });
-
         onItemClick();
     }
 
