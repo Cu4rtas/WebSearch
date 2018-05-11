@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.jham0.websearch.Tree.BinarySearchTree;
 
@@ -20,9 +21,9 @@ import java.util.List;
 
 public class Buscar extends AppCompatActivity {
 
-    ListView lvBusqueda;
-    EditText etBusqueda;
-
+    private ListView lvBusqueda;
+    private EditText etBusqueda;
+    private TextView tvSeconds;
     List<Web> busqueda;
 
 
@@ -30,18 +31,20 @@ public class Buscar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar);
-
+        /**Textview que muestra los segundos**/
+        tvSeconds = findViewById(R.id.tvSeconds);
         lvBusqueda = findViewById(R.id.lvBusqueda);
         etBusqueda = findViewById(R.id.editTextBuscar);
-
+        tvSeconds.setText("Tiempo de Busqueda: ");
         etBusqueda.addTextChangedListener(new TextWatcher() {
+            Long timeA;
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 lvBusqueda.setAdapter(null);
-
+                timeA = System.currentTimeMillis();
                 busqueda = AppMain.getAllWebsWithWords(etBusqueda.getText().toString().split(","));
                 lvBusqueda.setAdapter(new ArrayAdapter<Web>(getApplicationContext(),
                         android.R.layout.simple_list_item_1,
@@ -50,6 +53,9 @@ public class Buscar extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                /**Calcula el valor en milisegundos del tiempo de busqueda**/
+                double newTime = new Long((System.currentTimeMillis() - timeA)/1000).doubleValue();
+                tvSeconds.setText("Tiempo de Busqueda: " +(newTime)+"ms");
             }
         });
 
