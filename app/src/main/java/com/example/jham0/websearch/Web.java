@@ -49,7 +49,7 @@ public class Web implements Comparable<Web>{
 
     public String getPalabrasClaveConComa(){
         String str = "";
-        for(String s : palabrasClave) str += "," + str;
+        for(String s : palabrasClave) str += "," + s;
         return str.replaceFirst(",", "");
     }
     
