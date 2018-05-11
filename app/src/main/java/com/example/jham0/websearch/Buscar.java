@@ -60,7 +60,7 @@ public class Buscar extends AppCompatActivity {
                 intent.putExtra("Url", AppMain.getWebs().getAllItems().get(position)
                                 .getCuerpoURL());
                 intent.putExtra("Keywords", AppMain.getWebs().getAllItems().get(position)
-                                .getPalabrasClave().toString());
+                                .getPalabrasClaveConComa());
                 AppMain.setWebAModificar(AppMain.getWebs().getAllItems().get(position));
                 startActivity(intent);
                 finish();

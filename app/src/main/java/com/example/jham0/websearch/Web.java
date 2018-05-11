@@ -46,9 +46,11 @@ public class Web implements Comparable<Web>{
     public String getURL(){
         return this.URL;
     }
-    
-    public List<String> getPalabrasClave(){
-        return this.palabrasClave;
+
+    public String getPalabrasClaveConComa(){
+        String str = "";
+        for(String s : palabrasClave) str += "," + str;
+        return str.replaceFirst(",", "");
     }
     
     public void addKeyWords(String... keyWords){

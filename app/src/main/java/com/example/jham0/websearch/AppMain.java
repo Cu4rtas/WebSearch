@@ -26,6 +26,7 @@ public class AppMain {
         List<Web> listaPorPalabras =getWebsByKeyWords(palabras);
         List<Web> listaPorURL = getWebsByURL(palabras);
 
+        listaPorPalabras.forEach(web -> listaPorURL.add(web));
         return listaPorURL
                 .stream()
                 .distinct()
