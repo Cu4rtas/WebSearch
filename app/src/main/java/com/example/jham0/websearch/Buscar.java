@@ -29,8 +29,6 @@ public class Buscar extends AppCompatActivity {
     private Button btnBusqueda1, btnBusqueda2, btnBusqueda3;
     List<Web> busqueda;
     BinarySearchTree<String> randoms1 = Web.randomWebs(10000);
-    BinarySearchTree<String> randoms2 = Web.randomWebs(100000);
-    BinarySearchTree<String> randoms3 = Web.randomWebs(1000000);
 
 
     @Override
@@ -55,28 +53,32 @@ public class Buscar extends AppCompatActivity {
     }
 
     private void busquedasAleatorias() {
-        Long time = System.currentTimeMillis();
+
         btnBusqueda1.setOnClickListener(v -> {
+            Long time = System.currentTimeMillis();
             setTime(time,randoms1);
         });
 
         btnBusqueda2.setOnClickListener(v -> {
+            Long time = System.currentTimeMillis();
             BinarySearchTree<String> randoms2 = Web.randomWebs(100000);
             setTime(time,randoms2);
         });
 
         btnBusqueda3.setOnClickListener(v -> {
+            Long time = System.currentTimeMillis();
             BinarySearchTree<String> randoms3 = Web.randomWebs(1000000);
             setTime(time,randoms3);
         });
     }
 
     private void setTime(Long time, BinarySearchTree<String> randoms) {
+        DecimalFormat df = new DecimalFormat("#.00000");
         if (findTime(etBusqueda.getText().toString(),randoms) < 0) {
-            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+(System.currentTimeMillis()-time)/1000+"s");
+            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+df.format((System.currentTimeMillis()-time)/1000)+"ms");
         } else {
-            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+(findTime(etBusqueda.getText().toString()
-                    ,randoms)-time)/1000+"s");
+            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+df.format(((findTime(etBusqueda.getText().toString().toUpperCase()
+                    ,randoms)-time)/1000))+"ms");
         }
     }
 
@@ -104,7 +106,7 @@ public class Buscar extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 /**Calcula el valor en milisegundos del tiempo de busqueda**/
-                DecimalFormat df = new DecimalFormat("#.0000");
+                DecimalFormat df = new DecimalFormat("#.00000");
                 double newTime = new Long((System.currentTimeMillis() - timeA)/1000).doubleValue();
                 tvSeconds.setText("Tiempo de Busqueda: " +(df.format(newTime))+"ms");
             }

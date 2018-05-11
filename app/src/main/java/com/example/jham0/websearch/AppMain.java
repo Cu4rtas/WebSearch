@@ -22,7 +22,6 @@ public class AppMain {
     public static BinarySearchTree<Web> getWebs(){  return webs;    }
 
     public static List<Web> getAllWebsWithWords(String... palabras){
-        //YONOSÉNIQUÉESTOYHACIENDOCONMIVIDAHOY
         List<Web> listaPorPalabras =getWebsByKeyWords(palabras);
         List<Web> listaPorURL = getWebsByURL(palabras);
 

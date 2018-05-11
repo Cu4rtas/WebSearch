@@ -115,7 +115,7 @@ public class Web implements Comparable<Web>{
     private static String palabraAleatoria() {
         String word = "";
         int numeroAleatorio;
-        for (int j = 0; j < 5; j++) {
+        for (int j = 0; j < 3; j++) {
             numeroAleatorio = (int) (Math.random()*25+1);
             word += abedecario()[numeroAleatorio];
         }
