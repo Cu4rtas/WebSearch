@@ -7,6 +7,7 @@ import com.example.jham0.websearch.Tree.BinarySearchTree;
 import java.util.ArrayList;
 
 public class AppMain {
+
     private static BinarySearchTree<Web> webs = new BinarySearchTree<>();
 
     public static void insert(Web w){

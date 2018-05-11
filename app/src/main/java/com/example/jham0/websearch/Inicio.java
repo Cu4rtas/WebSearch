@@ -49,4 +49,11 @@ public class Inicio extends AppCompatActivity {
             startActivity(intent);
         });
     }
+
+    private void obtenerDatos() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {q
+
+        }
+    }
 }

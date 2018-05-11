@@ -42,7 +42,15 @@ public class Insertar extends AppCompatActivity {
                 newWeb.addKeyWords(keywords);
                 AppMain.insert(newWeb);
                 Toast.makeText(getApplicationContext(), "Web insertada", Toast.LENGTH_SHORT).show();
+                clearFields();
             }
         });
     }
+
+    private void clearFields() {
+        etInsertarURL.setText("");
+        etInsertarKeywords.setText("");
+    }
+
+
 }
