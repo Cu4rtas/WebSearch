@@ -56,7 +56,7 @@ public class Web implements Comparable<Web>{
     public List<String> getKewWords() {
         return palabrasClave;
     }
-    
+
     @Override
     public int compareTo(Web web2compare) {
         return this.URL.compareTo((web2compare).getURL());

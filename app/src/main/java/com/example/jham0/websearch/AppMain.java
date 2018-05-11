@@ -21,11 +21,28 @@ public class AppMain {
 
     public static List<Web> getWebsByPalabrasClave(String... palabras){
         //YONOSÉNIQUÉESTOYHACIENDOCONMIVIDAHOY
-        return (webs.getAllItems()
+        List<Web> listaPorPalabras = webs.getAllItems()
+                                        .stream()
+                                        .filter(web -> Arrays.asList(palabras)
+                                                .stream()
+                                                .anyMatch(palabra -> web.getKewWords()
+                                                        .stream()
+                                                        .anyMatch(s -> s.contains(palabra.toLowerCase()))))
+                                                .collect(Collectors.toList());
+
+        List<Web> listaPorURL = webs.getAllItems()
                 .stream()
-                .filter(web -> web.getKewWords()
+                .filter(web -> Arrays.asList(palabras)
                         .stream()
-                        .anyMatch(palabra -> !Arrays.asList(palabras).contains(palabra.toLowerCase()))).collect(Collectors.toList()));
+                        .anyMatch(pal -> web.getURL().contains(pal)))
+                .collect(Collectors.toList());
+
+        listaPorPalabras.forEach(w -> listaPorURL.add(w));
+
+        return listaPorURL
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public static List<Web> getAllWebs(){

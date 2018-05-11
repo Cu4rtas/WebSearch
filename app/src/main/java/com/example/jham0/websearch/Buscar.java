@@ -35,13 +35,13 @@ public class Buscar extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 lvBusqueda.setAdapter(null);
+                lvBusqueda.setAdapter(new ArrayAdapter<Web>(getApplicationContext(),
+                        android.R.layout.simple_list_item_1,
+                        AppMain.getWebsByPalabrasClave(etBusqueda.getText().toString().split(","))));
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                lvBusqueda.setAdapter(new ArrayAdapter<Web>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1,
-                        AppMain.getWebsByPalabrasClave(etBusqueda.getText().toString().split(","))));
             }
         });
 

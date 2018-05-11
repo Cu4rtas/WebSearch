@@ -43,7 +43,7 @@ public class Insertar extends AppCompatActivity {
             if (etInsertarURL.getText().toString().isEmpty() || etInsertarKeywords.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Campo vacío", Toast.LENGTH_SHORT).show();
             } else {
-                Web newWeb = new Web(etInsertarURL.getText().toString());
+                Web newWeb = new Web(etInsertarURL.getText().toString().toLowerCase());
                 String[] keywords = etInsertarKeywords.getText().toString().toLowerCase().split(",");
                 newWeb.addKeyWords(keywords);
                 AppMain.insert(newWeb);
