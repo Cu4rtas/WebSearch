@@ -9,12 +9,9 @@ import android.widget.EditText;
 
 import com.example.jham0.websearch.Tree.BinarySearchTree;
 
-import java.util.TreeSet;
-
 
 public class Inicio extends AppCompatActivity {
     /**Components**/
-    EditText etSearch;
     Button btnInsertar,btnIrBuscar;
     /**Atributos**/
     BinarySearchTree<Web> webs = new BinarySearchTree<>();
@@ -33,7 +30,6 @@ public class Inicio extends AppCompatActivity {
         //addActions
         insertar();
         buscar();
-        findViewById(R.id.btnArbol).setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), TreeView.class)));
     }
 
     private void insertar() {
