@@ -52,7 +52,7 @@ public class Inicio extends AppCompatActivity {
 
     private void obtenerDatos() {
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {q
+        if (bundle != null) {
 
         }
     }

@@ -6,6 +6,8 @@ package com.example.jham0.websearch.Tree;
  */
 
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -88,6 +90,91 @@ public class BinarySearchTree< E extends Comparable<? super E> >
             }
         }
         return this;
+    }
+
+    public void delete(E itemToDelete) {
+        if (root == null) {
+            System.out.println("El árbol esta vacío");
+            return;
+        }
+
+        BinaryNode<E> parent = null;
+        BinaryNode<E> current = root;
+        Boolean isLeft = null;
+
+        while (itemToDelete.compareTo(current.item) != 0) {
+            parent = current;
+            if (itemToDelete.compareTo(current.item) < 0) {
+                current = current.left;
+                isLeft = true;
+            } else {
+                current = current.right;
+                isLeft = false;
+            }
+
+            if (current == null) {
+                System.out.println("No se encontró el item a eliminar");
+                return;
+            }
+        }
+
+        // Caso 1: hoja
+        if (current.left == null && current.right == null) {
+            if (current != root) {
+                if (isLeft) {
+                    parent.left = null;
+                } else {
+                    parent.right = null;
+                }
+            } else {
+                root = null;
+            }
+        } else if (current.right == null) {
+            // Caso 2: solo hijo izquierdo
+
+            if (current == root) {
+                root = current.left;
+            } else if (isLeft) {
+                parent.left = current.left;
+            } else {
+                parent.right = current.left;
+            }
+        } else if (current.left == null) {
+            // Caso 3: solo hijo derecho
+
+            if (current == root) {
+                root = current.right;
+            } else if (isLeft) {
+                parent.left = current.right;
+            } else {
+                parent.right = current.right;
+
+            }
+        } else {
+            ArrayList<BinaryNode<E>> sucesor = getSucesor(current.right);
+            BinaryNode<E> successor = sucesor.get(0);
+            BinaryNode<E> successorParent = sucesor.get(1);
+            successorParent.left = successor.right;
+            successor.right = current.right;
+            if(current == root) {
+                root = successor;
+            }
+            else if(isLeft) parent.left = successor;
+            else parent.right = successor;
+        }
+
+    }
+
+    private ArrayList<BinaryNode<E>> getSucesor(BinaryNode<E> node) {
+        if(node.left.left == null) {
+            ArrayList<BinaryNode<E>> family = new ArrayList<>();
+            family.add(node.left);
+            family.add(node);
+            return family;
+        }
+        else {
+            return getSucesor(node.left);
+        }
     }
 
     public String preorder() {
