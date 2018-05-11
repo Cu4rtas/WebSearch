@@ -58,7 +58,7 @@ public class Web implements Comparable<Web>{
     }
     
     public boolean matchFound(String... str){
-        return palabrasClave.stream().anyMatch(s -> Arrays.asList(str).contains(s));    
+        return palabrasClave.stream().anyMatch(s -> Arrays.asList(str).contains(s));
     }
     
     public Web findMatch(String... str){
