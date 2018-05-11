@@ -12,13 +12,19 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.example.jham0.websearch.Tree.BinarySearchTree;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Buscar extends AppCompatActivity {
 
     ListView lvBusqueda;
     EditText etBusqueda;
+
+    List<Web> busqueda;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +41,11 @@ public class Buscar extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 lvBusqueda.setAdapter(null);
+
+                busqueda = AppMain.getAllWebsWithWords(etBusqueda.getText().toString().split(","));
                 lvBusqueda.setAdapter(new ArrayAdapter<Web>(getApplicationContext(),
                         android.R.layout.simple_list_item_1,
-                        AppMain.getAllWebsWithWords(etBusqueda.getText().toString().split(","))));
+                        busqueda));
             }
 
             @Override
@@ -57,9 +65,9 @@ public class Buscar extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), Insertar.class);
-                intent.putExtra("Url", AppMain.getWebs().getAllItems().get(position)
+                intent.putExtra("Url", busqueda.get(position)
                                 .getCuerpoURL());
-                intent.putExtra("Keywords", AppMain.getWebs().getAllItems().get(position)
+                intent.putExtra("Keywords", busqueda.get(position)
                                 .getPalabrasClaveConComa());
                 AppMain.setWebAModificar(AppMain.getWebs().getAllItems().get(position));
                 startActivity(intent);
