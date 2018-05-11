@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -24,19 +25,67 @@ public class Buscar extends AppCompatActivity {
 
     private ListView lvBusqueda;
     private EditText etBusqueda;
-    private TextView tvSeconds;
+    private TextView tvSeconds, tvTimeRandomSearch;
+    private Button btnBusqueda1, btnBusqueda2, btnBusqueda3;
     List<Web> busqueda;
+    BinarySearchTree<String> randoms1 = Web.randomWebs(10000);
+    BinarySearchTree<String> randoms2 = Web.randomWebs(100000);
+    BinarySearchTree<String> randoms3 = Web.randomWebs(1000000);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar);
-        /**Textview que muestra los segundos**/
+        /**Componentes**/
+        //TextView que muestra los segundos
         tvSeconds = findViewById(R.id.tvSeconds);
+        tvTimeRandomSearch = findViewById(R.id.tvTimeRandomSearch);
         lvBusqueda = findViewById(R.id.lvBusqueda);
         etBusqueda = findViewById(R.id.editTextBuscar);
         tvSeconds.setText("Tiempo de Busqueda: ");
+        tvTimeRandomSearch.setText("Tiempo Busqueda Aletatoria: ");
+        //Botones de busqueda
+        btnBusqueda1 = findViewById(R.id.btnBusqueda1);
+        btnBusqueda2 = findViewById(R.id.btnBusqueda2);
+        btnBusqueda3 = findViewById(R.id.btnBusqueda3);
+        /**Metodos**/
+        buscar();
+        busquedasAleatorias();
+    }
+
+    private void busquedasAleatorias() {
+        Long time = System.currentTimeMillis();
+        btnBusqueda1.setOnClickListener(v -> {
+            setTime(time,randoms1);
+        });
+
+        btnBusqueda2.setOnClickListener(v -> {
+            BinarySearchTree<String> randoms2 = Web.randomWebs(100000);
+            setTime(time,randoms2);
+        });
+
+        btnBusqueda3.setOnClickListener(v -> {
+            BinarySearchTree<String> randoms3 = Web.randomWebs(1000000);
+            setTime(time,randoms3);
+        });
+    }
+
+    private void setTime(Long time, BinarySearchTree<String> randoms) {
+        if (findTime(etBusqueda.getText().toString(),randoms) < 0) {
+            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+(System.currentTimeMillis()-time)/1000+"s");
+        } else {
+            tvTimeRandomSearch.setText("Tiempo Busqueda Aleatoria: "+(findTime(etBusqueda.getText().toString()
+                    ,randoms)-time)/1000+"s");
+        }
+    }
+
+    private Long findTime(String search, BinarySearchTree<String> tree) {
+        if (tree.find(search)) return System.currentTimeMillis();
+        else return -1L;
+    }
+
+    private void buscar() {
         etBusqueda.addTextChangedListener(new TextWatcher() {
             Long timeA;
             @Override
@@ -62,6 +111,8 @@ public class Buscar extends AppCompatActivity {
         });
         onItemClick();
     }
+
+    //TODO: Hacer que inserte web aleatorias, y que muestre los tiempos de busqueda
 
     /**
      * Se encarga de obtener la informacion del item seleccionado
