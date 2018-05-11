@@ -53,8 +53,8 @@ public class Web implements Comparable<Web>{
         palabrasClave = palabrasClave.stream().distinct().collect(Collectors.toList());
     }
     
-    public void getKewWords(){
-        palabrasClave.stream().forEach(System.out::println);
+    public List<String> getKewWords(){
+        return palabrasClave;
     }
     
     public boolean matchFound(String... str){
