@@ -35,7 +35,10 @@ public class Web implements Comparable<Web>{
         palabrasClave = new ArrayList();
         this.URL = preURL + URL;
     }
-    
+
+    public String getCuerpoURL(){
+        return URL.substring(7);
+    }
     public void setURL(String url){
         URL = preURL + url;
     }
@@ -64,6 +67,6 @@ public class Web implements Comparable<Web>{
     
     @Override
     public String toString(){
-        return "URL: " + URL + "Palabras clave [" + palabrasClave.toString() + "]";
+        return "URL: " + URL + ". Palabras clave [" + palabrasClave.toString() + "]";
     }
 }

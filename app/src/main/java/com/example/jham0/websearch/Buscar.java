@@ -37,7 +37,7 @@ public class Buscar extends AppCompatActivity {
                 lvBusqueda.setAdapter(null);
                 lvBusqueda.setAdapter(new ArrayAdapter<Web>(getApplicationContext(),
                         android.R.layout.simple_list_item_1,
-                        AppMain.getWebsByPalabrasClave(etBusqueda.getText().toString().split(","))));
+                        AppMain.getAllWebsWithWords(etBusqueda.getText().toString().split(","))));
             }
 
             @Override
@@ -58,9 +58,10 @@ public class Buscar extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), Insertar.class);
                 intent.putExtra("Url", AppMain.getWebs().getAllItems().get(position)
-                                .getURL());
+                                .getCuerpoURL());
                 intent.putExtra("Keywords", AppMain.getWebs().getAllItems().get(position)
-                                .getPalabrasClave().toArray());
+                                .getPalabrasClave().toString());
+                AppMain.setWebAModificar(AppMain.getWebs().getAllItems().get(position));
                 startActivity(intent);
                 finish();
             }

@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public class AppMain {
 
+    private static Web webAModificar;
+
     private static BinarySearchTree<Web> webs = new BinarySearchTree<>();
 
     public static void insert(Web w){
@@ -19,25 +21,10 @@ public class AppMain {
 
     public static BinarySearchTree<Web> getWebs(){  return webs;    }
 
-    public static List<Web> getWebsByPalabrasClave(String... palabras){
+    public static List<Web> getAllWebsWithWords(String... palabras){
         //YONOSÉNIQUÉESTOYHACIENDOCONMIVIDAHOY
-        List<Web> listaPorPalabras = webs.getAllItems()
-                                        .stream()
-                                        .filter(web -> Arrays.asList(palabras)
-                                                .stream()
-                                                .anyMatch(palabra -> web.getKewWords()
-                                                        .stream()
-                                                        .anyMatch(s -> s.contains(palabra.toLowerCase()))))
-                                                .collect(Collectors.toList());
-
-        List<Web> listaPorURL = webs.getAllItems()
-                .stream()
-                .filter(web -> Arrays.asList(palabras)
-                        .stream()
-                        .anyMatch(pal -> web.getURL().contains(pal)))
-                .collect(Collectors.toList());
-
-        listaPorPalabras.forEach(w -> listaPorURL.add(w));
+        List<Web> listaPorPalabras =getWebsByKeyWords(palabras);
+        List<Web> listaPorURL = getWebsByURL(palabras);
 
         return listaPorURL
                 .stream()
@@ -45,7 +32,42 @@ public class AppMain {
                 .collect(Collectors.toList());
     }
 
+    public static List<Web> getWebsByKeyWords(String... palabras){
+        return webs.getAllItems()
+                .stream()
+                .filter(web -> Arrays.asList(palabras)
+                        .stream()
+                        .anyMatch(palabra -> web.getKewWords()
+                                .stream()
+                                .anyMatch(s -> s.contains(palabra.toLowerCase()))))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Web> getWebsByURL(String... palabras){
+        return webs.getAllItems()
+                .stream()
+                .filter(web -> Arrays.asList(palabras)
+                        .stream()
+                        .anyMatch(pal -> web.getURL().contains(pal)))
+                .collect(Collectors.toList());
+    }
+
     public static List<Web> getAllWebs(){
         return webs.getAllItems();
+    }
+
+    public static void modificar(Web nueva){
+        webs.delete(webAModificar);
+        webs.insert(nueva);
+        webAModificar = null;
+    }
+
+    public static boolean isModifyingWeb(){
+        return webAModificar != null;
+    }
+
+    public static void setWebAModificar(Web w){
+        webAModificar = w;
+        Log.i("WEB A MODIFICAR", w.toString());
     }
 }

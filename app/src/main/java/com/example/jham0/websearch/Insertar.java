@@ -21,14 +21,13 @@ public class Insertar extends AppCompatActivity {
     /**Components**/
     private EditText etInsertarURL, etInsertarKeywords;
     private Button btnInsercion;
-    /**Atributes**/
-    public static BinarySearchTree<Web> arbol = new BinarySearchTree<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insertar);
         connect();
-        insertar();
+        InsertarOModificar();
         obtenerDatos();
     }
 
@@ -38,7 +37,7 @@ public class Insertar extends AppCompatActivity {
         btnInsercion = findViewById(R.id.btnInsercion);
     }
 
-    private void insertar() {
+    private void InsertarOModificar() {
         btnInsercion.setOnClickListener(view -> {
             if (etInsertarURL.getText().toString().isEmpty() || etInsertarKeywords.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Campo vacío", Toast.LENGTH_SHORT).show();
@@ -46,14 +45,24 @@ public class Insertar extends AppCompatActivity {
                 Web newWeb = new Web(etInsertarURL.getText().toString().toLowerCase());
                 String[] keywords = etInsertarKeywords.getText().toString().toLowerCase().split(",");
                 newWeb.addKeyWords(keywords);
-                AppMain.insert(newWeb);
+                if(AppMain.isModifyingWeb()){
+                    modificar(newWeb);
+                } else {
+                    insertar(newWeb);
+                }
                 Toast.makeText(getApplicationContext(), "Web insertada", Toast.LENGTH_SHORT).show();
                 clearFields();
             }
         });
     }
 
-    //TODO: Meterle las palabras claves
+    private void insertar(Web newWeb){
+        AppMain.insert(newWeb);
+    }
+
+    private void modificar(Web newWeb){
+        AppMain.modificar(newWeb);
+    }
     /**
      * Obtiene los datos pasados por Bundle del
      * activity Buscar(lvBusqueda)
@@ -62,7 +71,7 @@ public class Insertar extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             etInsertarURL.setText(bundle.getString("Url"));
-            /*etInsertarKeywords.setText(bundle.getStringArray("Keywords").toString());*/
+            etInsertarKeywords.setText(bundle.getString("Keywords"));
         }
     }
 
